@@ -72,6 +72,7 @@ const throwIfParentDoesNotExist = async (filepath: string) => {
  * @param filepath
  * @param options.mode - The directory mode. Note this is ignored in expo.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mkdir = async (filepath: string, _options?: Mode) => {
   const fileUri = pathToUri(filepath);
   if (__DEV__) console.log('mkdir called #oN8IFP', { filepath, fileUri });
@@ -102,7 +103,8 @@ const rmdir = async (filepath: string) => {
   return;
 };
 
-const readdir = async (filepath: string, _options?: {}) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const readdir = async (filepath: string, _options?: object) => {
   const fileUri = pathToUri(filepath);
 
   const stats = await FileSystem.getInfoAsync(fileUri);
@@ -171,7 +173,8 @@ async function readFile(
   return base64ToUintArray({ input: contents });
 }
 
-const unlink = async (filepath: string, _options?: {}) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const unlink = async (filepath: string, _options?: object) => {
   await throwENOENTIfDoesNotExist(filepath);
   const fileUri = pathToUri(filepath);
   return await FileSystem.deleteAsync(fileUri);
@@ -183,7 +186,8 @@ const rename = async (oldFilepath: string, newFilepath: string) => {
   return await FileSystem.moveAsync({ from: oldFileUri, to: newFileUri });
 };
 
-const stat = async (filepath: string, _options?: {}) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const stat = async (filepath: string, _options?: object) => {
   const fileUri = pathToUri(filepath);
   const stats = await FileSystem.getInfoAsync(fileUri);
 
@@ -215,11 +219,13 @@ const stat = async (filepath: string, _options?: {}) => {
 
 const lstat = stat;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const symlink = (_target: string, _filepath: string) => {
   throw new Error('Symlinks not suppoerted on expo. #uVMCeB');
 };
 
-const readlink = (_filepath: string, _options?: {}) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const readlink = (_filepath: string, _options?: object) => {
   throw new Error('Symlinks not supported on expo. #6OMLFv');
 };
 

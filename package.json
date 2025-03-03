@@ -14,17 +14,16 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
+    "lint": "eslint",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "build:docs": "rimraf docs && typedoc",
     "publish:docs": "yarn build:docs && gh-pages -d docs"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "eslint"
     }
   },
   "prettier": {
@@ -48,19 +47,25 @@
     }
   ],
   "devDependencies": {
+    "@eslint/js": "^9.21.0",
     "@size-limit/preset-small-lib": "^4.7.0",
+    "eslint": "^9.19.0",
+    "eslint-plugin-react": "^7.37.4",
     "gh-pages": "^3.1.0",
+    "globals": "^15.14.0",
     "husky": "^4.3.0",
     "rimraf": "^3.0.2",
     "size-limit": "^4.7.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.0.3",
     "typedoc": "^0.20.0-beta.8",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "typescript-eslint": "^8.25.0"
   },
   "dependencies": {
     "buffer": "^6.0.2",
     "expo-file-system": "^9.2.0",
     "path": "^0.12.7"
-  }
+  },
+  "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728"
 }

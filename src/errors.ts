@@ -1,7 +1,9 @@
 const Err = (name: string) => {
   return class extends Error {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any) {
       super(...args);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (this as any).code = name;
       if (this.message) {
         this.message = name + ': ' + this.message;
