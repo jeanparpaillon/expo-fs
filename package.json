@@ -21,11 +21,6 @@
     "build:docs": "rimraf docs && typedoc",
     "publish:docs": "yarn build:docs && gh-pages -d docs"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "eslint"
-    }
-  },
   "prettier": {
     "printWidth": 80,
     "semi": true,

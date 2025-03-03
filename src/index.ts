@@ -189,32 +189,37 @@ const rename = async (oldFilepath: string, newFilepath: string) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const stat = async (filepath: string, _options?: object) => {
   const fileUri = pathToUri(filepath);
-  const stats = await FileSystem.getInfoAsync(fileUri);
 
-  if (!stats.exists) {
+  try {
+    const stats = await FileSystem.getInfoAsync(fileUri);
+    
+    if (!stats.exists) {
+      throw new ENOENT(filepath);
+    }
+  
+    return {
+      type: stats.isDirectory ? 'dir' : 'file',
+      mode,
+      size: stats.size,
+      ino: 1,
+      mtimeMs: stats.modificationTime * 1e3,
+      ctimeMs: stats.modificationTime * 1e3,
+      uid: 1,
+      gid: 1,
+      dev: 1,
+      isFile() {
+        return !stats.isDirectory;
+      },
+      isDirectory() {
+        return stats.isDirectory;
+      },
+      isSymbolicLink() {
+        return false;
+      },
+    };
+  } catch (error) {
     throw new ENOENT(filepath);
   }
-
-  return {
-    type: stats.isDirectory ? 'dir' : 'file',
-    mode,
-    size: stats.size,
-    ino: 1,
-    mtimeMs: stats.modificationTime * 1e3,
-    ctimeMs: stats.modificationTime * 1e3,
-    uid: 1,
-    gid: 1,
-    dev: 1,
-    isFile() {
-      return !stats.isDirectory;
-    },
-    isDirectory() {
-      return stats.isDirectory;
-    },
-    isSymbolicLink() {
-      return false;
-    },
-  };
 };
 
 const lstat = stat;
